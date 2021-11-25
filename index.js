@@ -24,35 +24,29 @@ client.on('messageCreate', async (message) => {
 	
 	if (Datamode === 1) {
 		Data = message.content[3]
-		//console.log(Data)
-		/**		message.channel.messages.fetch({ limit: 2 })
-			.then(messageMappings => {
-				let messages = Array.from(messageMappings.values());
-				console.log(messages.content)
-				let previousMessage = messages[1];
-				// do something with previous message
-			})
-			.catch(error => console.log(error))
-			*/
+		
 		const Gcommand = require('./AddData.js')
-
-		//const Gcommand = client.Gcommands.get(interaction.commandName);
-		 const msg = message.content.split(" ")
+		mesg = message.content.toUpperCase();
+		 const msg = mesg.split(" ")
 		module.exports = { msg };
 		console.log("Index msg " + msg)
 
 		await Gcommand.execute(msg)
 
 
-		//const args = message.content.slice(prefix.length).trim().split(/ +/g);
-		//const msg= args.shift().toLowerCase();
 
 		Total = msg.length
-		//console.log(Total)
-
+		
 
 	}
+	if (Datamode === 2) {
+		mesg = message.content.toUpperCase();
+		const msg = mesg.split(" ")
+		const Gcommand = require('./commands/Gym/Graph.js')
+		await Gcommand.execute(msg)
 
+
+    }
 	
 })
 
@@ -87,13 +81,28 @@ collector.on('collect', async i => {
 		
 		const Gcommand = require('./commands/Gym/previous-workouts.js')
 
-	//const Gcommand = client.Gcommands.get(interaction.commandName);
+
 
 		
 		await Gcommand.execute()
 	}
 });
-	
+	collector.on('collect', async i => {
+		if (i.customId === 'GRAPH') {
+			const { MessageActionRow, MessageButton, MessageEmbed, Client } = require('discord.js');
+		
+			await i.update({ content: 'Input Excersise', components: [] });
+		//	await i.update({ content: 'Enter Data', components: [row] });
+			Datamode = 2;
+			//console.log(Datamode)
+			//const Gcommand = require('./commands/Gym/Graph.js')
+
+			// Gcommand = client.Gcommands.get(interaction.commandName);
+
+
+			//await Gcommand.execute()
+		}
+	});
 	
 	collector.on('collect', async i => {
 		if (i.customId === 'SECONDARY') {
@@ -124,7 +133,7 @@ collector.on('collect', async i => {
 			//const Gcommand = require('./commands/Gym/TEST.js')
 
 			//const Gcommand = client.Gcommands.get(interaction.commandName);
-
+			Datamode = 0
 
 			//await Gcommand.execute()
 		}
