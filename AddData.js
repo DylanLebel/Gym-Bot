@@ -7,7 +7,7 @@ module.exports.execute =  function (msg) {
       
     const fs = require("fs");
 
-        workbook.xlsx.readFile('new1.xlsx')
+        workbook.xlsx.readFile('new.xlsx')
             .then(function () {
 
            
@@ -21,25 +21,6 @@ module.exports.execute =  function (msg) {
 
 
 
-                fs.readFile("./Excersises.json", "utf8", (err, jsonString) => {
-                    if (err) {
-                        console.log("File read failed:", err);
-                        return;
-                    }
-                  //  console.log("File data:", jsonString);
-                    abc = JSON.parse(jsonString)
-                    //jsonString.forEach(function (item, index, array) {
-                   //     console.log(item, index)
-                  //  })
-                    /**
-                    for (let i = 0; i < words.length; i++) {
-    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-}
-                    var boop = jsonString[0]
-                    abc1= abc[0].charAt(0)
-                    console.log("boop" + abc1);
-              */
-              });
               
                 console.log(msg + " this is message")
              
@@ -108,24 +89,13 @@ module.exports.execute =  function (msg) {
 
                         }
                     }
-                    //Do whatever you want to do with this row like inserting in db, etc
-                    
-                   /**
-                    if (bonds === (row.values[1])) {
-
-                        var row = worksheet.getRow(rowNumber);
-                        row.getCell(cars2).value = "testubrsdtfhrsy"; // A5's value set to 5
-                        row.commit();
-                        return workbook.xlsx.writeFile('new.xlsx');
-
-                    }
-                    */
+                  
 
                 });
 
 
               
-                return workbook.xlsx.writeFile('new1.xlsx');
+                return workbook.xlsx.writeFile('new.xlsx');
             })
     }
 

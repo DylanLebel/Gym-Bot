@@ -9,17 +9,11 @@ module.exports.execute = function (msg) {
         .then(function () {
             var worksheet = workbook.getWorksheet(1);
 
-
+            const dates = worksheet.getRow(1);
             worksheet.eachRow(function (row, rowNumber) {
                 //console.log('Row ' + rowNumber + ' = ' + JSON.stringify(row.values));
                 ex = row.values[1]
-                if (rowNumber == 1) {
-                    for (var i = 2; i < row.values.length; i++) {
-                        var dates = []
-                        dates.push(row.values[i])
-                        console.log(dates)
-                    }
-                }
+               
                 if (ex == undefined) { }
                 else {
 

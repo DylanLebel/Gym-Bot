@@ -5,7 +5,7 @@ module.exports.execute = () => {
     var Excel = require('exceljs');
     var workbook = new Excel.Workbook();
 
-    workbook.xlsx.readFile('new1.xlsx')
+    workbook.xlsx.readFile('new.xlsx')
         .then(function () {
 
             var worksheet = workbook.getWorksheet(1);
@@ -69,7 +69,7 @@ module.exports.execute = () => {
             
             
             cars3 = cars2 + 1
-            console.log(cars3)
+            console.log()
 
 
 
@@ -78,7 +78,7 @@ module.exports.execute = () => {
             console.log(cars2)
             row.getCell(cars2).value = DateE; // A5's value set to 5
             row.commit();
-            return workbook.xlsx.writeFile('new1.xlsx');
+            return workbook.xlsx.writeFile('new.xlsx');
         })
            
 
