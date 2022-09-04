@@ -21,25 +21,6 @@ module.exports.execute =  function (msg) {
 
 
 
-                fs.readFile("./Excersises.json", "utf8", (err, jsonString) => {
-                    if (err) {
-                        console.log("File read failed:", err);
-                        return;
-                    }
-                  //  console.log("File data:", jsonString);
-                    abc = JSON.parse(jsonString)
-                    //jsonString.forEach(function (item, index, array) {
-                   //     console.log(item, index)
-                  //  })
-                    /**
-                    for (let i = 0; i < words.length; i++) {
-    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-}
-                    var boop = jsonString[0]
-                    abc1= abc[0].charAt(0)
-                    console.log("boop" + abc1);
-              */
-              });
               
                 console.log(msg + " this is message")
              

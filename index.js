@@ -15,10 +15,10 @@ var Datamode = 0;
 
 
 
-let customer = ["dumbbell curls","rope pull downs","rope pull ups","converging chest press","leg press","dips","calve raises","chin ups","lat pulldown wide overhand grip","leg extensions"]
-fs.writeFile("./Excersises.json", JSON.stringify(customer, null, 4), err => {
-	if (err) console.log(err)
-});
+//let customer = ["dumbbell curls","rope pull downs","rope pull ups","converging chest press","leg press","dips","calve raises","chin ups","lat pulldown wide overhand grip","leg extensions"]
+//fs.writeFile("./Excersises.json", JSON.stringify(customer, null, 4), err => {
+	//if (err) console.log(err)
+//;});
 
 client.on('messageCreate', async (message) => {
 	
@@ -46,6 +46,13 @@ client.on('messageCreate', async (message) => {
 		await Gcommand.execute(msg)
 
 
+	}
+	if (Datamode === 3) {
+
+		mesg = message.content.toUpperCase();
+		const msg = mesg.split(" ")
+		const Gcommand = require('./commands/Gym/NewE')
+		await Gcommand.execute(msg)
     }
 	
 })
@@ -113,6 +120,10 @@ collector.on('collect', async i => {
 						.setCustomId('DONE')
 						.setLabel('DONE')
 						.setStyle("DANGER"),
+					new MessageButton()
+						.setCustomId('NEWE')
+						.setLabel('NEW')
+					.setStyle('SUCCESS')
 			)
 
 			await i.update({ content: 'Enter Data', components: [row] });
@@ -136,6 +147,14 @@ collector.on('collect', async i => {
 			Datamode = 0
 
 			//await Gcommand.execute()
+		}
+	});
+	collector.on('collect', async i => {
+		if (i.customId === 'NEWE') {
+			await i.update({ content: 'Input New Excercise', components: [] });
+
+			Datamode = 3
+
 		}
 	});
 	collector.on('collect', async i => {
