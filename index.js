@@ -1,4 +1,9 @@
 const fs = require('fs');
+
+
+
+
+
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -11,7 +16,7 @@ config.statusMessage = "video games | (" + config.prefix + "help)";
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES] });
 
-const filter = i => i.customId === 'PRIMARY' || 'SECONDARY' || 'DONE' || 'NEWE' || 'GRAPH' || 'TEST';
+const filter = i => i.customId === 'PRIMARY' || 'SECONDARY' || 'DONE' || 'NEWE' || 'GRAPH' || 'Download';
 
 var Datamode = 0;
 
@@ -31,7 +36,18 @@ for (const file of commandFiles) {
 const channel  = client.channels.cache.get('973305189178175519');
 client.on('interactionCreate', async interaction => {
 
+	if (!interaction.isCommand()) return;
 
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
 
 
 	console.log("working")
@@ -98,14 +114,14 @@ client.on('interactionCreate', async interaction => {
 
 		}
 
-		if (i.customId === 'TEST') {
+		if (i.customId === 'Download') {
 			await i.update({ content: 'A button was clicked!', components: [] });
 
-			const Gcommand = require('./commands/Gym/TEST.js')
+			const Gcommand = require('./commands/Gym/Download')
 
 
 
-			await Gcommand.execute()
+			await Gcommand.execute(interaction)
 		}
 
 		if (i.customId === 'NEWE') {
@@ -145,7 +161,7 @@ client.on('interactionCreate', async interaction => {
 				
 
 							.then(interaction => {
-								setTimeout(() => interaction.delete(), 2000000 /*time unitl delete in milliseconds*/);
+								setTimeout(() => interaction.delete(), 200000 /*time unitl delete in milliseconds*/);
 							})
 					i.deferUpdate()
 					//}

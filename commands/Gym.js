@@ -29,7 +29,7 @@ const row = new MessageActionRow()
         .setStyle("SUCCESS"),
     new MessageButton()
         .setCustomId("TEST")
-        .setLabel("TEST")
+        .setLabel("Download")
     .setStyle("DANGER"),
 );
 return interaction.reply({ content: 'Social Media', ephemeral: false, components: [row] });
